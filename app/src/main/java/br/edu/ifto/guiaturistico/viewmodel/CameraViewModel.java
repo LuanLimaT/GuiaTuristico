@@ -73,7 +73,7 @@ public class CameraViewModel extends AndroidViewModel {
         pontoAtual.setValue(encontrado);
     }
 
-    /** Ponto turístico mais próximo, mesmo que o usuário esteja fora do raio dele. */
+    //Ponto turístico mais próximo, mesmo que o usuário esteja fora do raio dele
     public PontoTuristico getPontoMaisProximo() {
         Location posicao = localizacao.getValue();
         List<PontoTuristico> pontos = repositorio.getPontos().getValue();

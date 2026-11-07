@@ -17,7 +17,7 @@ import br.edu.ifto.guiaturistico.repositorio.PontoTuristicoRepositorio;
  * ViewModel da tela do mapa: entrega os pontos turísticos e lembra onde o mapa estava,
  * para que ao voltar da tela de fotos o mapa continue no mesmo lugar e com o mesmo zoom.
  *
- * Também guarda a localização simulada (definida pelo usuário no mapa) que é compartilhada
+ * Também guarda a posição atual (definida pelo usuário no mapa) que é compartilhada
  * com a tela da câmera quando este ViewModel é obtido no escopo da Activity.
  */
 public class MapaViewModel extends AndroidViewModel {
@@ -30,8 +30,8 @@ public class MapaViewModel extends AndroidViewModel {
     private double zoom = 15;
     private boolean permissaoJaPedida = false;
 
-    // localização simulada: o usuário posiciona o crosshair no mapa e clica em "Usar esta localização"
-    private final MutableLiveData<Location> localizacaoSimulada = new MutableLiveData<>();
+    // posição atual: o usuário posiciona o marcador no mapa
+    private final MutableLiveData<Location> posicaoAtual = new MutableLiveData<>();
 
     public MapaViewModel(@NonNull Application application) {
         super(application);
@@ -55,18 +55,18 @@ public class MapaViewModel extends AndroidViewModel {
     public boolean isPermissaoJaPedida() { return permissaoJaPedida; }
     public void setPermissaoJaPedida(boolean pedida) { permissaoJaPedida = pedida; }
 
-    // Localização Simulada
-    public LiveData<Location> getLocalizacaoSimulada() { return localizacaoSimulada; }
+    // Posição Atual
+    public LiveData<Location> getPosicaoAtual() { return posicaoAtual; }
 
-    public void definirLocalizacaoSimulada(double latitude, double longitude) {
-        Location loc = new Location("simulada");
+    public void definirPosicaoAtual(double latitude, double longitude) {
+        Location loc = new Location("posicao_atual");
         loc.setLatitude(latitude);
         loc.setLongitude(longitude);
         loc.setAccuracy(0);
-        localizacaoSimulada.setValue(loc);
+        posicaoAtual.setValue(loc);
     }
 
-    public void limparLocalizacaoSimulada() {
-        localizacaoSimulada.setValue(null);
+    public void limparPosicaoAtual() {
+        posicaoAtual.setValue(null);
     }
 }

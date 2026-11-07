@@ -49,8 +49,8 @@ import br.edu.ifto.guiaturistico.viewmodel.MapaViewModel;
  * Cada ponto aparece como um marcador e um círculo mostrando o seu raio.
  * Clicar no marcador abre as fotos do ponto; o botão "Tirar fotos" abre a câmera.
  *
- * Tocar no mapa define uma localização simulada (marcador vermelho),
- * usada pela tela da câmera para cadastrar/fotografar pontos sem depender do GPS real.
+ * Tocar no mapa define a posição atual (marcador vermelho),
+ * usada pela tela da câmera para cadastrar/fotografar pontos.
  */
 public class MapaFragment extends Fragment {
 
@@ -62,8 +62,8 @@ public class MapaFragment extends Fragment {
     private TextView tvResumo;
     private MaterialButton btLimparLocalizacao;
 
-    // marcador da localização simulada (posicionado pelo toque do usuário)
-    private Marker marcadorSimulado;
+    // marcador da posição atual (posicionado pelo toque do usuário)
+    private Marker marcadorPosicaoAtual;
 
     // overlays dos pontos turísticos (guardados para poder redesenhar quando a lista mudar)
     private final List<Overlay> overlaysDosPontos = new ArrayList<>();
@@ -84,7 +84,7 @@ public class MapaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // ViewModel no escopo da ACTIVITY para compartilhar a localização simulada com a câmera
+        // ViewModel no escopo da ACTIVITY para compartilhar a posição atual com a câmera
         viewModel = new ViewModelProvider(requireActivity()).get(MapaViewModel.class);
         tvResumo = view.findViewById(R.id.tvResumo);
 
@@ -97,18 +97,18 @@ public class MapaFragment extends Fragment {
         fabMinhaLocalizacao.setOnClickListener(v -> centralizarNaMinhaLocalizacao());
 
         btLimparLocalizacao = view.findViewById(R.id.btLimparLocalizacao);
-        btLimparLocalizacao.setOnClickListener(v -> limparLocalizacaoSimulada());
+        btLimparLocalizacao.setOnClickListener(v -> limparPosicaoAtual());
 
         // sempre que a lista de pontos mudar, o mapa é redesenhado
         viewModel.getPontos().observe(getViewLifecycleOwner(), this::desenharPontos);
 
-        // restaura o marcador simulado se já existia
-        viewModel.getLocalizacaoSimulada().observe(getViewLifecycleOwner(), loc -> {
+        // restaura o marcador da posição atual se já existia
+        viewModel.getPosicaoAtual().observe(getViewLifecycleOwner(), loc -> {
             if (loc != null) {
-                colocarMarcadorSimulado(new GeoPoint(loc.getLatitude(), loc.getLongitude()), false);
+                colocarMarcadorPosicaoAtual(new GeoPoint(loc.getLatitude(), loc.getLongitude()), false);
                 btLimparLocalizacao.setVisibility(View.VISIBLE);
             } else {
-                removerMarcadorSimulado();
+                removerMarcadorPosicaoAtual();
                 btLimparLocalizacao.setVisibility(View.GONE);
             }
         });
@@ -131,14 +131,14 @@ public class MapaFragment extends Fragment {
         mapController.setZoom(viewModel.getZoom());
         mapController.setCenter(new GeoPoint(viewModel.getCentroLatitude(), viewModel.getCentroLongitude()));
 
-        // detecta toques no mapa para posicionar o marcador simulado
+        // detecta toques no mapa para posicionar o marcador da posição atual
         // adicionado PRIMEIRO (índice 0) para que receba eventos POR ÚLTIMO,
         // permitindo que marcadores dos pontos turísticos tratem o clique antes
         MapEventsOverlay toqueOverlay = new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                colocarMarcadorSimulado(p, true);
-                viewModel.definirLocalizacaoSimulada(p.getLatitude(), p.getLongitude());
+                colocarMarcadorPosicaoAtual(p, true);
+                viewModel.definirPosicaoAtual(p.getLatitude(), p.getLongitude());
                 return true;
             }
 
@@ -155,40 +155,40 @@ public class MapaFragment extends Fragment {
         mapView.getOverlays().add(minhaLocalizacaoOverlay);
     }
 
-    // ===== MARCADOR SIMULADO =====
+    // ===== MARCADOR POSIÇÃO ATUAL =====
 
-    private void colocarMarcadorSimulado(GeoPoint posicao, boolean mostrarFeedback) {
-        if (marcadorSimulado == null) {
-            marcadorSimulado = new Marker(mapView);
-            marcadorSimulado.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-            marcadorSimulado.setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.ic_marcador_simulado));
-            marcadorSimulado.setInfoWindow(null);
-            mapView.getOverlays().add(marcadorSimulado);
+    private void colocarMarcadorPosicaoAtual(GeoPoint posicao, boolean mostrarFeedback) {
+        if (marcadorPosicaoAtual == null) {
+            marcadorPosicaoAtual = new Marker(mapView);
+            marcadorPosicaoAtual.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            marcadorPosicaoAtual.setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.ic_marcador_posicao_atual));
+            marcadorPosicaoAtual.setInfoWindow(null);
+            mapView.getOverlays().add(marcadorPosicaoAtual);
         }
-        marcadorSimulado.setPosition(posicao);
-        marcadorSimulado.setTitle(getString(R.string.localizacao_simulada_ativa,
+        marcadorPosicaoAtual.setPosition(posicao);
+        marcadorPosicaoAtual.setTitle(getString(R.string.posicao_atual_ativa,
                 posicao.getLatitude(), posicao.getLongitude()));
         mapView.invalidate();
 
         btLimparLocalizacao.setVisibility(View.VISIBLE);
 
         if (mostrarFeedback && getView() != null) {
-            Snackbar.make(getView(), R.string.localizacao_simulada_definida, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), R.string.posicao_atual_definida, Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    private void removerMarcadorSimulado() {
-        if (marcadorSimulado != null) {
-            mapView.getOverlays().remove(marcadorSimulado);
-            marcadorSimulado = null;
+    private void removerMarcadorPosicaoAtual() {
+        if (marcadorPosicaoAtual != null) {
+            mapView.getOverlays().remove(marcadorPosicaoAtual);
+            marcadorPosicaoAtual = null;
             mapView.invalidate();
         }
     }
 
-    private void limparLocalizacaoSimulada() {
-        viewModel.limparLocalizacaoSimulada();
+    private void limparPosicaoAtual() {
+        viewModel.limparPosicaoAtual();
         if (getView() != null) {
-            Snackbar.make(getView(), R.string.localizacao_simulada_limpa, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), R.string.posicao_atual_limpa, Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -287,7 +287,7 @@ public class MapaFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        marcadorSimulado = null; // será recriado em onViewCreated se necessário
+        marcadorPosicaoAtual = null; // será recriado em onViewCreated se necessário
         mapView.onDetach();
     }
 

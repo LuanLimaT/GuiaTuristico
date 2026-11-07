@@ -5,7 +5,7 @@ package br.edu.ifto.guiaturistico.model;
 public class Foto {
 
     private final String caminho;   // arquivo .jpg salvo na pasta do app
-    private final long dataHora;    // momento em que a foto foi tirada (milissegundos)
+    private final long dataHora;    // momento em que a foto foi tirada
     private final double latitude;  // posição do aparelho no momento da foto
     private final double longitude;
 

@@ -13,10 +13,10 @@
     </plurals>
     <string name="tirar_fotos">Tirar fotos</string>
     <string name="minha_localizacao">Minha localização</string>
-    <string name="localizacao_simulada_definida">Posição definida! Toque na aba Câmera para fotografar.</string>
-    <string name="localizacao_simulada_ativa">Posição simulada: %1$.5f, %2$.5f</string>
-    <string name="limpar_localizacao">Limpar posição simulada</string>
-    <string name="localizacao_simulada_limpa">Posição simulada removida. Usando GPS real.</string>
+    <string name="posicao_atual_definida">Posição definida! Toque na aba Câmera para fotografar.</string>
+    <string name="posicao_atual_ativa">Posição atual: %1$.5f, %2$.5f</string>
+    <string name="limpar_posicao_atual">Limpar posição atual</string>
+    <string name="posicao_atual_limpa">Posição atual removida. Usando GPS real.</string>
     <string name="dica_toque_mapa">Toque no mapa para definir sua posição</string>
     <string name="mapa_sem_localizacao">Sem a localização o mapa funciona, mas não mostra onde você está.</string>
 

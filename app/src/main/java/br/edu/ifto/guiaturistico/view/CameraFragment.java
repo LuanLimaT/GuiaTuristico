@@ -53,9 +53,8 @@ import br.edu.ifto.guiaturistico.viewmodel.MapaViewModel;
  *  - Se estiver fora de todos, o app pergunta se ele quer cadastrar um novo ponto turístico
  *    (nome + localização atual + raio) e, depois do cadastro, tira a foto.
  *
- * Suporta localização simulada: se o usuário definiu uma posição no mapa (via crosshair),
- * essa posição é usada em vez do GPS real. Isso permite testar o app no emulador sem
- * precisar alterar as coordenadas do GPS nas configurações do emulador.
+ * Suporta posição atual definida no mapa: se o usuário definiu uma posição no mapa,
+ * essa posição é usada em vez do GPS real.
  */
 public class CameraFragment extends Fragment {
 
@@ -68,7 +67,7 @@ public class CameraFragment extends Fragment {
     };
 
     private CameraViewModel viewModel;
-    private MapaViewModel mapaViewModel; // compartilhado com MapaFragment para localização simulada
+    private MapaViewModel mapaViewModel; // compartilhado com MapaFragment para posição atual
     private LifecycleCameraController cameraController;
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -82,8 +81,8 @@ public class CameraFragment extends Fragment {
 
     // recebe a posição do GPS a cada segundo e repassa para o ViewModel
     private final LocationListener ouvinteLocalizacao = location -> {
-        // só usa GPS real se não houver localização simulada
-        if (mapaViewModel.getLocalizacaoSimulada().getValue() == null) {
+        // só usa GPS real se não houver posição atual definida no mapa
+        if (mapaViewModel.getPosicaoAtual().getValue() == null) {
             viewModel.atualizarLocalizacao(location);
         }
     };
@@ -114,10 +113,10 @@ public class CameraFragment extends Fragment {
         viewModel.getLocalizacao().observe(getViewLifecycleOwner(), l -> atualizarStatus());
         viewModel.getPontoAtual().observe(getViewLifecycleOwner(), p -> atualizarStatus());
 
-        // se a localização simulada mudar, atualiza o ViewModel da câmera
-        mapaViewModel.getLocalizacaoSimulada().observe(getViewLifecycleOwner(), locSimulada -> {
-            if (locSimulada != null) {
-                viewModel.atualizarLocalizacao(locSimulada);
+        // se a posição atual mudar, atualiza o ViewModel da câmera
+        mapaViewModel.getPosicaoAtual().observe(getViewLifecycleOwner(), posAtual -> {
+            if (posAtual != null) {
+                viewModel.atualizarLocalizacao(posAtual);
             }
         });
 
@@ -352,10 +351,10 @@ public class CameraFragment extends Fragment {
             return;
         }
 
-        // indica se está usando localização simulada ou GPS real
-        boolean simulada = mapaViewModel.getLocalizacaoSimulada().getValue() != null;
-        String precisao = simulada
-                ? getString(R.string.localizacao_simulada_ativa,
+        // indica se está usando posição atual definida no mapa ou GPS real
+        boolean posicaoDefinida = mapaViewModel.getPosicaoAtual().getValue() != null;
+        String precisao = posicaoDefinida
+                ? getString(R.string.posicao_atual_ativa,
                         posicao.getLatitude(), posicao.getLongitude())
                 : getString(R.string.status_precisao, posicao.getAccuracy());
 
