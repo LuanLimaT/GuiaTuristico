@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/grafico_navegacao"
+    app:startDestination="@id/mapaFragment">
+
+    <!-- Tela inicial: mapa com os pontos turísticos -->
+    <fragment
+        android:id="@+id/mapaFragment"
+        android:name="br.edu.ifto.guiaturistico.view.MapaFragment"
+        android:label="@string/titulo_mapa"
+        tools:layout="@layout/fragment_mapa">
+        <action
+            android:id="@+id/action_mapa_para_camera"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_mapa_para_fotos"
+            app:destination="@id/fotosFragment" />
+    </fragment>
+
+    <!-- Tela para tirar fotos (e cadastrar um ponto novo, se estiver fora de todos) -->
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="br.edu.ifto.guiaturistico.view.CameraFragment"
+        android:label="@string/titulo_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_camera_para_fotos"
+            app:destination="@id/fotosFragment" />
+    </fragment>
+
+    <!-- Fotos de um ponto turístico; o título da Toolbar é o nome do ponto -->
+    <fragment
+        android:id="@+id/fotosFragment"
+        android:name="br.edu.ifto.guiaturistico.view.FotosFragment"
+        android:label="{nomePonto}"
+        tools:layout="@layout/fragment_fotos">
+        <argument
+            android:name="idPonto"
+            app:argType="long" />
+        <argument
+            android:name="nomePonto"
+            app:argType="string" />
+        <!-- volta para o mapa antes de abrir a câmera, para não empilhar telas repetidas -->
+        <action
+            android:id="@+id/action_fotos_para_camera"
+            app:destination="@id/cameraFragment"
+            app:popUpTo="@id/mapaFragment" />
+    </fragment>
+
+</navigation>

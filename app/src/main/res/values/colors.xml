@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta do app: verde-azulado (cerrado/rios) + âmbar (girassol) -->
+    <color name="verde">#FF00796B</color>
+    <color name="verde_escuro">#FF004D40</color>
+    <color name="verde_claro">#FFB2DFDB</color>
+    <color name="verde_noite">#FF80CBC4</color>
+    <color name="ambar">#FFF9A825</color>
+    <color name="ambar_claro">#FFFFECB3</color>
+
+    <!-- Raio dos pontos no mapa -->
+    <color name="raio_preenchimento">#3300796B</color>
+    <color name="raio_borda">#CC00796B</color>
+
+    <!-- Cartão de status na câmera (fundo claro nos dois temas, texto escuro) -->
+    <color name="status_dentro">#EBC8E6C9</color>
+    <color name="status_fora">#EBFFE0B2</color>
+    <color name="status_neutro">#EBECEFF1</color>
+    <color name="texto_status">#FF1B1B1B</color>
+</resources>

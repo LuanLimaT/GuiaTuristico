@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Guia Turístico</string>
+
+    <!-- Títulos das telas (Toolbar) -->
+    <string name="titulo_mapa">Pontos turísticos</string>
+    <string name="titulo_camera">Registrar fotos</string>
+
+    <!-- Mapa -->
+    <string name="mapa_sem_pontos">Nenhum ponto turístico cadastrado ainda</string>
+    <plurals name="mapa_resumo">
+        <item quantity="one">%d ponto turístico • toque no marcador para ver as fotos</item>
+        <item quantity="other">%d pontos turísticos • toque em um marcador para ver as fotos</item>
+    </plurals>
+    <string name="tirar_fotos">Tirar fotos</string>
+    <string name="minha_localizacao">Minha localização</string>
+    <string name="localizacao_simulada_definida">Posição definida! Toque na aba Câmera para fotografar.</string>
+    <string name="localizacao_simulada_ativa">Posição simulada: %1$.5f, %2$.5f</string>
+    <string name="limpar_localizacao">Limpar posição simulada</string>
+    <string name="localizacao_simulada_limpa">Posição simulada removida. Usando GPS real.</string>
+    <string name="dica_toque_mapa">Toque no mapa para definir sua posição</string>
+    <string name="mapa_sem_localizacao">Sem a localização o mapa funciona, mas não mostra onde você está.</string>
+
+    <!-- Permissões -->
+    <string name="permissao_titulo">Permissão necessária</string>
+    <string name="permissao_localizacao_mapa">Para mostrar no mapa onde você está, o app precisa acessar sua localização.</string>
+    <string name="permissao_camera_explicacao">Para fotografar os pontos turísticos o app precisa da câmera, e da localização para saber em qual ponto turístico você está.</string>
+    <string name="permissao_negada_titulo">Permissão negada</string>
+    <string name="permissao_negada_camera">Sem acesso à câmera e à localização não é possível registrar fotos. Você pode continuar usando o mapa e vendo as fotos já cadastradas, ou liberar as permissões nas configurações do Android.</string>
+    <string name="pedir_permissao">Permitir</string>
+    <string name="agora_nao">Agora não</string>
+    <string name="voltar_ao_mapa">Voltar ao mapa</string>
+    <string name="aguardando_gps">Aguardando o GPS encontrar sua posição…</string>
+
+    <!-- Câmera -->
+    <string name="capturar">Tirar foto</string>
+    <string name="status_procurando">Procurando sua localização…</string>
+    <string name="status_procurando_detalhe">Aguarde o GPS. Ao ar livre ele encontra sua posição mais rápido.</string>
+    <string name="status_precisao">Precisão do GPS: ±%1$.0f m</string>
+    <string name="status_dentro">Você está em: %1$s</string>
+    <string name="status_dentro_detalhe">A %1$s do centro (raio de %2$s) • %3$d foto(s)</string>
+    <string name="status_fora">Fora dos pontos turísticos</string>
+    <string name="status_fora_detalhe">Mais próximo: %1$s, a %2$s. Ao fotografar aqui você poderá cadastrar um novo ponto.</string>
+    <string name="status_fora_sem_pontos">Nenhum ponto cadastrado. Ao fotografar você poderá cadastrar o primeiro.</string>
+    <string name="foto_salva">Foto salva em %1$s</string>
+    <string name="ver_fotos">Ver fotos</string>
+    <string name="erro_salvar_foto">Opsss! Não foi possível salvar a foto</string>
+
+    <!-- Cadastro de ponto turístico -->
+    <string name="fora_titulo">Fora dos pontos turísticos</string>
+    <string name="fora_pergunta">Você não está dentro do raio de nenhum ponto turístico cadastrado.\n\nDeseja cadastrar um novo ponto turístico nesta localização?</string>
+    <string name="cadastro_titulo">Novo ponto turístico</string>
+    <string name="cadastro_localizacao">Localização (sua posição atual):\n%1$.6f, %2$.6f  (precisão ±%3$.0f m)</string>
+    <string name="dica_nome">Nome do ponto turístico</string>
+    <string name="dica_raio">Raio da região</string>
+    <string name="sufixo_metros">metros</string>
+    <string name="raio_padrao">100</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="cadastrar_e_fotografar">Cadastrar e fotografar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="erro_nome_vazio">Informe o nome do ponto turístico</string>
+    <string name="erro_raio_invalido">Informe um raio entre %1$.0f e %2$.0f metros</string>
+    <string name="ponto_cadastrado">\"%1$s\" cadastrado!</string>
+
+    <!-- Fotos -->
+    <string name="fotos_info_ponto">Raio de %1$.0f m • %2$.5f, %3$.5f</string>
+    <plurals name="fotos_quantidade">
+        <item quantity="one">%d foto</item>
+        <item quantity="other">%d fotos</item>
+    </plurals>
+    <string name="fotos_vazio_titulo">Nenhuma foto ainda</string>
+    <string name="fotos_vazio_texto">Vá até este ponto turístico e toque em \"Tirar fotos\".</string>
+    <string name="foto_coordenadas">Tirada em %1$.6f, %2$.6f</string>
+    <string name="fechar">Fechar</string>
+</resources>
