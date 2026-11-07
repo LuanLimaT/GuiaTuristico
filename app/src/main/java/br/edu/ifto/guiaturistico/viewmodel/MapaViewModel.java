@@ -8,8 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import org.osmdroid.util.GeoPoint;
-
 import java.util.List;
 
 import br.edu.ifto.guiaturistico.model.PontoTuristico;
@@ -26,7 +24,9 @@ public class MapaViewModel extends AndroidViewModel {
 
     private final PontoTuristicoRepositorio repositorio;
 
-    private GeoPoint centro = new GeoPoint(-10.18444, -48.33361); // Palmas - TO (slide)
+    // posição central do mapa (Palmas - TO como padrão inicial)
+    private double centroLatitude = -10.18444;
+    private double centroLongitude = -48.33361;
     private double zoom = 15;
     private boolean permissaoJaPedida = false;
 
@@ -42,19 +42,20 @@ public class MapaViewModel extends AndroidViewModel {
         return repositorio.getPontos();
     }
 
-    public void salvarPosicaoDoMapa(GeoPoint centro, double zoom) {
-        this.centro = centro;
+    public void salvarPosicaoDoMapa(double latitude, double longitude, double zoom) {
+        this.centroLatitude = latitude;
+        this.centroLongitude = longitude;
         this.zoom = zoom;
     }
 
-    public GeoPoint getCentro() { return centro; }
+    public double getCentroLatitude() { return centroLatitude; }
+    public double getCentroLongitude() { return centroLongitude; }
     public double getZoom() { return zoom; }
 
     public boolean isPermissaoJaPedida() { return permissaoJaPedida; }
     public void setPermissaoJaPedida(boolean pedida) { permissaoJaPedida = pedida; }
 
-    // ===== LOCALIZAÇÃO SIMULADA =====
-
+    // Localização Simulada
     public LiveData<Location> getLocalizacaoSimulada() { return localizacaoSimulada; }
 
     public void definirLocalizacaoSimulada(double latitude, double longitude) {

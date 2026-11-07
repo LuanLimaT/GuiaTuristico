@@ -20,9 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import br.edu.ifto.guiaturistico.R;
 import br.edu.ifto.guiaturistico.adapter.FotoAdapter;
 import br.edu.ifto.guiaturistico.model.Foto;
@@ -102,11 +99,9 @@ public class FotosFragment extends Fragment {
 
         // a foto é carregada fora da thread principal
         Handler threadPrincipal = new Handler(Looper.getMainLooper());
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
+        new Thread(() -> {
             Bitmap imagem = ImagemUtil.carregar(foto.getCaminho(), TAMANHO_FOTO_AMPLIADA);
             threadPrincipal.post(() -> imageView.setImageBitmap(imagem));
-        });
-        executor.shutdown(); // termina a thread assim que a foto for carregada
+        }).start();
     }
 }

@@ -129,7 +129,7 @@ public class MapaFragment extends Fragment {
 
         IMapController mapController = mapView.getController();
         mapController.setZoom(viewModel.getZoom());
-        mapController.setCenter(viewModel.getCentro());
+        mapController.setCenter(new GeoPoint(viewModel.getCentroLatitude(), viewModel.getCentroLongitude()));
 
         // detecta toques no mapa para posicionar o marcador simulado
         // adicionado PRIMEIRO (índice 0) para que receba eventos POR ÚLTIMO,
@@ -277,7 +277,8 @@ public class MapaFragment extends Fragment {
         super.onPause();
         // guarda posição e zoom para quando o usuário voltar para o mapa
         viewModel.salvarPosicaoDoMapa(
-                new GeoPoint(mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude()),
+                mapView.getMapCenter().getLatitude(),
+                mapView.getMapCenter().getLongitude(),
                 mapView.getZoomLevelDouble());
         minhaLocalizacaoOverlay.disableMyLocation();
         mapView.onPause();

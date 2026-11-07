@@ -60,8 +60,6 @@ import br.edu.ifto.guiaturistico.viewmodel.MapaViewModel;
 public class CameraFragment extends Fragment {
 
     private static final int CODIGO_PERMISSOES = 2;
-    private static final float RAIO_MINIMO = 10;
-    private static final float RAIO_MAXIMO = 5000;
 
     private static final String[] PERMISSOES = {
             Manifest.permission.CAMERA,
@@ -125,12 +123,6 @@ public class CameraFragment extends Fragment {
 
         fabCapturar.setOnClickListener(v -> aoClicarEmCapturar());
         atualizarStatus();
-
-        // se já existe uma localização simulada definida, aplica imediatamente
-        Location locSimulada = mapaViewModel.getLocalizacaoSimulada().getValue();
-        if (locSimulada != null) {
-            viewModel.atualizarLocalizacao(locSimulada);
-        }
     }
 
     @Override
@@ -333,8 +325,9 @@ public class CameraFragment extends Fragment {
             } catch (NumberFormatException e) {
                 raio = -1;
             }
-            if (raio < RAIO_MINIMO || raio > RAIO_MAXIMO) {
-                tilRaio.setError(getString(R.string.erro_raio_invalido, RAIO_MINIMO, RAIO_MAXIMO));
+            if (raio < CameraViewModel.RAIO_MINIMO || raio > CameraViewModel.RAIO_MAXIMO) {
+                tilRaio.setError(getString(R.string.erro_raio_invalido,
+                        CameraViewModel.RAIO_MINIMO, CameraViewModel.RAIO_MAXIMO));
                 return;
             }
 

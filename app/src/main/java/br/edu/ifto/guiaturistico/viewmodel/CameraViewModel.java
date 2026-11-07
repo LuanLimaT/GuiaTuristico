@@ -27,6 +27,9 @@ import br.edu.ifto.guiaturistico.repositorio.PontoTuristicoRepositorio;
  */
 public class CameraViewModel extends AndroidViewModel {
 
+    public static final float RAIO_MINIMO = 10;
+    public static final float RAIO_MAXIMO = 5000;
+
     private final PontoTuristicoRepositorio repositorio;
     private final MutableLiveData<Location> localizacao = new MutableLiveData<>();
     private final MediatorLiveData<PontoTuristico> pontoAtual = new MediatorLiveData<>();
