@@ -23,17 +23,16 @@ import java.util.concurrent.Executors;
 import br.edu.ifto.guiaturistico.model.Foto;
 import br.edu.ifto.guiaturistico.model.PontoTuristico;
 
-/**
- * Fonte única dos dados do app. Guarda os pontos turísticos (e as fotos de cada um)
- * num arquivo JSON dentro do aparelho e entrega a lista para os ViewModels via LiveData.
- *
- * É um singleton: todas as telas enxergam a MESMA lista, então quando a tela da câmera
- * cadastra um ponto, o mapa já recebe a atualização automaticamente.
- *
- * Regra de threads:
- *  - a lista em memória só é alterada na thread principal;
- *  - ler e gravar o arquivo acontece numa thread separada (executor).
- */
+//Guarda os pontos turísticos (e as fotos de cada um)
+ // num arquivo JSON dentro do aparelho e entrega a lista para os ViewModels via LiveData.
+
+// É um singleton: todas as telas enxergam a MESMA lista, então quando a tela da câmera
+ // cadastra um ponto, o mapa já recebe a atualização automaticamente.
+
+// Regra de threads:
+ //  - a lista em memória só é alterada na thread principal;
+ // - ler e gravar o arquivo acontece numa thread separada (executor).
+
 public class PontoTuristicoRepositorio {
 
     private static final String TAG = "PontoRepositorio";

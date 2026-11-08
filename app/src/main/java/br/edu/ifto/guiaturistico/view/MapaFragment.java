@@ -47,7 +47,7 @@ import br.edu.ifto.guiaturistico.viewmodel.MapaViewModel;
 /**
  * Tela inicial: mapa com todos os pontos turísticos cadastrados.
  * Cada ponto aparece como um marcador e um círculo mostrando o seu raio.
- * Clicar no marcador abre as fotos do ponto; o botão "Tirar fotos" abre a câmera.
+ * Clicmar no marcador abre as fotos do ponto; o botão "Tirar fotos" abre a câera.
  *
  * Tocar no mapa define a posição atual (marcador vermelho),
  * usada pela tela da câmera para cadastrar/fotografar pontos.
@@ -217,6 +217,7 @@ public class MapaFragment extends Fragment {
             marcador.setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.ic_marcador_ponto));
             marcador.setTitle(ponto.getNome());
             marcador.setOnMarkerClickListener((m, mv) -> {
+                viewModel.definirPosicaoAtual(ponto.getLatitude(), ponto.getLongitude());
                 abrirFotos(ponto);
                 return true;
             });

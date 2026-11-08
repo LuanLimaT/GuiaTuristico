@@ -13,13 +13,12 @@ import java.util.List;
 import br.edu.ifto.guiaturistico.model.PontoTuristico;
 import br.edu.ifto.guiaturistico.repositorio.PontoTuristicoRepositorio;
 
-/**
- * ViewModel da tela do mapa: entrega os pontos turísticos e lembra onde o mapa estava,
- * para que ao voltar da tela de fotos o mapa continue no mesmo lugar e com o mesmo zoom.
- *
- * Também guarda a posição atual (definida pelo usuário no mapa) que é compartilhada
- * com a tela da câmera quando este ViewModel é obtido no escopo da Activity.
- */
+
+// ViewModel da tela do mapa: entrega os pontos turísticos e lembra onde o mapa estava,
+ // para que ao voltar da tela de fotos o mapa continue no mesmo lugar e com o mesmo zoom.
+// Também guarda a posição atual (definida pelo usuário no mapa) que é compartilhada
+ // com a tela da câmera quando este ViewModel é obtido no escopo da Activity.
+
 public class MapaViewModel extends AndroidViewModel {
 
     private final PontoTuristicoRepositorio repositorio;

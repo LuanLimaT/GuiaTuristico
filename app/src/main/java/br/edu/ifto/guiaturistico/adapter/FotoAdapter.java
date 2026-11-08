@@ -23,11 +23,11 @@ import br.edu.ifto.guiaturistico.R;
 import br.edu.ifto.guiaturistico.model.Foto;
 import br.edu.ifto.guiaturistico.util.ImagemUtil;
 
-/**
- * Mostra as fotos de um ponto turístico em grade.
- * As miniaturas são carregadas em segundo plano e guardadas num cache,
- * assim a rolagem da lista não trava.
- */
+
+// Mostra as fotos de um ponto turístico em grade.
+//As miniaturas são carregadas em segundo plano e guardadas num cache,
+//assim a rolagem da lista não trava.
+
 public class FotoAdapter extends RecyclerView.Adapter<FotoAdapter.FotoViewHolder> {
 
     private static final int TAMANHO_MINIATURA = 400; // px
@@ -53,7 +53,7 @@ public class FotoAdapter extends RecyclerView.Adapter<FotoAdapter.FotoViewHolder
         this.listener = listener;
     }
 
-    /** Recebe as fotos e mostra as mais recentes primeiro. */
+    // Recebe as fotos e mostra as mais recentes primeiro.
     public void atualizar(List<Foto> fotos) {
         listaFotos.clear();
         for (int i = fotos.size() - 1; i >= 0; i--)

@@ -26,14 +26,14 @@ public class PontoTuristico {
         this.raio = raio;
     }
 
-    //Distância em metros entre o centro deste ponto e uma posição qualquer./
+    //Distância em metros entre o centro deste ponto e uma posição qualquer
     public float distanciaAte(double outraLatitude, double outraLongitude) {
         float[] resultado = new float[1];
         Location.distanceBetween(latitude, longitude, outraLatitude, outraLongitude, resultado);
         return resultado[0];
     }
 
-    //true se a posição informada está dentro do raio deste ponto. /
+    //true se a posição informada está dentro do raio deste ponto
     public boolean contem(double outraLatitude, double outraLongitude) {
         return distanciaAte(outraLatitude, outraLongitude) <= raio;
     }

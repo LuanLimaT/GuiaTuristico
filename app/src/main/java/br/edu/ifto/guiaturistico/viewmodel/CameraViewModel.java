@@ -15,16 +15,15 @@ import br.edu.ifto.guiaturistico.model.Foto;
 import br.edu.ifto.guiaturistico.model.PontoTuristico;
 import br.edu.ifto.guiaturistico.repositorio.PontoTuristicoRepositorio;
 
-/**
- * ViewModel da tela da câmera. Aqui fica a regra principal do app:
- * descobrir se o usuário está dentro do raio de algum ponto turístico.
- *
- *  - localizacao: última posição recebida do GPS (enviada pelo fragment)
- *  - pontoAtual:  ponto turístico em cujo raio o usuário está, ou null se estiver fora de todos
- *
- * pontoAtual é recalculado sozinho quando a localização muda OU quando a lista de pontos muda
- * (por exemplo, logo depois de cadastrar um ponto novo).
- */
+ //ViewModel da tela da câmera. Aqui fica a regra principal:
+ //descobrir se o usuário está dentro do raio de algum ponto turístico.
+
+   //- localizacao: última posição recebida do GPS (enviada pelo fragment)
+   //- pontoAtual:  ponto turístico em cujo raio o usuário está, ou null se estiver fora de todos
+
+  //pontoAtual é recalculado sozinho quando a localização muda OU quando a lista de pontos muda
+  //(por exemplo, logo depois de cadastrar um ponto novo).
+
 public class CameraViewModel extends AndroidViewModel {
 
     public static final float RAIO_MINIMO = 10;
